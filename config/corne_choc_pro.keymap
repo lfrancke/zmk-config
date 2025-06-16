@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include "keys_de.h"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
-#include "keys_de.h"
 
 / {
     chosen { zmk,physical-layout = &default_layout; };
@@ -21,7 +21,7 @@
         default_layer {
             display-name = "noted";
             bindings = <
-&kp J     &kp Z  &kp Y  &kp U  &kp A           &kp Q    &kp C_MUTE  &kp C_PP  &kp P    &kp B      &kp M      &kp L    &kp F  &kp BSPC
+&kp J     &kp Z  &kp Y  &kp U  &kp A           &kp Q    &kp C_MUTE  &kp C_PP  &kp P    &kp B      &kp M      &kp L    &kp F  &kp DE_ESZETT
 &mo 3     &kp C  &kp S  &kp I  &kp E           &kp O    &kp LALT    &kp RALT  &kp D    &kp T      &kp N      &kp R    &kp H  &mo 3
 &kp LCMD  &kp V  &kp X  &kp C  &kp V           &kp B                          &kp W    &kp G      &kp COMMA  &kp DOT  &kp K  &kp RMETA
                         &mo 4  &kp LEFT_SHIFT  &kp TAB                        &kp RET  &kp SPACE  &mo 4
@@ -111,4 +111,3 @@
         };
     };
 };
-
