@@ -100,41 +100,11 @@
                 { "row": 3, "col": 3,  "x": 2.5, "y": 3.12 },
                 { "row": 3, "col": 4,  "x": 3.5, "y": 3.12, "r": 12.0, "rx": 3.5, "ry": 4.12 },
                 { "row": 3, "col": 5,  "x": 4.48, "y": 2.83, "h": 1.5, "r": 24.0, "rx": 4.48, "ry": 4.33 },
-                                      
+
                 { "row": 3, "col": 8,  "x": 7.52, "y": 2.83, "h": 1.5, "r": -24.0, "rx": 8.52, "ry": 4.33 },
                 { "row": 3, "col": 9,  "x": 8.5, "y": 3.12, "r": -12.0, "rx": 9.5, "ry": 4.12 },
                 { "row": 3, "col": 10, "x": 9.5, "y": 3.12 }
             ]
         }
-    },
-    "sensors": [
-        {
-            "ref": "left_encoder_ex1",
-            "name": "encoder_left_ex1",
-            "identifier": "encoder_left_ex1",
-            "compatible": "alps,ec11",
-            "label": "LEFT_ENCODER_EX1"
-        },
-        {
-            "ref": "left_encoder_ex2",
-            "name": "encoder_left_ex2",
-            "identifier": "encoder_left_ex2",
-            "compatible": "alps,ec11",
-            "label": "LEFT_ENCODER_EX2"
-        },
-        {
-            "ref": "right_encoder_ex1",
-            "name": "encoder_right_ex1",
-            "identifier": "encoder_right_ex1",
-            "compatible": "alps,ec11",
-            "label": "RIGHT_ENCODER_EX1"
-        },
-        {
-            "ref": "right_encoder_ex2",
-            "name": "encoder_right_ex2",
-            "identifier": "encoder_right_ex2",
-            "compatible": "alps,ec11",
-            "label": "RIGHT_ENCODER_EX2"
-        }
-    ]
+    }
 }
