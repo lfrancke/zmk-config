@@ -21,17 +21,17 @@
         default_layer {
             display-name = "noted";
             bindings = <
-&kp J     &kp Z  &kp Y  &kp U  &kp A           &kp Q    &kp C_MUTE  &kp C_PP  &kp P    &kp B      &kp M      &kp L    &kp F  &kp DE_ESZETT
-&mo 3     &kp C  &kp S  &kp I  &kp E           &kp O    &kp LALT    &kp RALT  &kp D    &kp T      &kp N      &kp R    &kp H  &mo 3
-&kp LCMD  &kp V  &kp X  &kp C  &kp V           &kp B                          &kp W    &kp G      &kp COMMA  &kp DOT  &kp K  &kp RMETA
-                        &mo 4  &kp LEFT_SHIFT  &kp TAB                        &kp RET  &kp SPACE  &mo 4
+&kp J     &kp Z  &kp Y  &kp U  &kp A           &kp Q          &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 1 DE_ESZETT
+&mo 3     &kp C  &kp S  &kp I  &kp E           &kp O          &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 3
+&kp LCMD  &kp V  &kp X  &kp C  &kp V           &kp B                                &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
+                        &mo 4  &kp LEFT_SHIFT  &mt LCTRL TAB                        &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 4
             >;
         };
 
-        lower_layer {
-            display-name = "NUMBER";
+        zmk_layer {
+            display-name = "ZMK";
             bindings = <
-&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &kp LCTRL  &kp RCTRL  &kp N6    &kp N7    &kp N8     &kp N9     &kp N0  &kp DE_CAPITAL_ESZETT
+&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &kp LCTRL  &kp RCTRL  &kp N6    &kp N7    &kp N8     &kp N9     &kp N0  &trans
 &kp LCTRL  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LALT   &kp RALT   &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &trans  &trans
 &kp LSHFT  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                        &trans    &trans    &trans     &trans     &trans  &trans
                                           &kp LGUI      &trans        &kp SPACE                             &kp LGUI  &trans    &kp SPACE
