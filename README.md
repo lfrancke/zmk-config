@@ -18,9 +18,26 @@ This was forked from https://github.com/Keebart/zmk-config
 1. Edit `config/corne_choc_pro.keymap`
 2. Push to GitHub - firmware builds automatically via GitHub Actions
 3. Download `.uf2` files from Actions artifacts
-4. Flash `corne_choc_pro_left-zmk.uf2` and `corne_choc_pro_right-zmk.uf2`
+4. Flash `corne_choc_pro_left-zmk.uf2` and `corne_choc_pro_right-zmk.uf2` (**both sides required!**)
 
 Alternatively, use https://nickcoutsos.github.io/keymap-editor/
+
+### Host System Setup
+**Important**: This keymap uses German layout (`keys_de.h`), so your host system needs to be set to German keyboard layout.
+
+#### Set German layout system-wide:
+```bash
+setxkbmap de
+```
+
+#### Set German layout for specific device only:
+```bash
+# Find your keyboard device ID
+xinput list
+
+# Set layout for specific device (replace <device-id> with actual ID)
+setxkbmap -device <device-id> de
+```
 
 ### Troubleshooting Bluetooth
 1. Use the settings reset firmware: `settings_reset-corne_choc_pro_left-zmk.uf2`
