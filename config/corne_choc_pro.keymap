@@ -18,17 +18,17 @@
     keymap {
         compatible = "zmk,keymap";
 
-        layer_0 {
+        default {
             display-name = "noted";
             bindings = <
-&kp J     &kp Z  &kp Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 3 DE_ESZETT
+&kp J     &kp Z  &kp Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 4 DE_ESZETT
 &mo 2     &kp C  &kp S  &kp I            &kp E            &kp O            &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 2
 &kp LCMD  &kp V  &kp X  &kp DE_U_UMLAUT  &kp DE_A_UMLAUT  &kp DE_O_UMLAUT                        &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
-                        &mo 0            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 0
+                        &mo 3            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 3
             >;
         };
 
-        layer_1 {
+        uppercase {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
@@ -37,13 +37,22 @@
             >;
         };
 
-        layer_2 {
+        symbols {
             display-name = "SYMBOL";
             bindings = <
 &kp AT     &none          &kp UNDERSCORE  &kp LBKT        &kp RIGHT_BRACKET  &kp CARET     &trans  &trans  &kp EXCLAMATION  &kp LESS_THAN         &kp GREATER_THAN       &kp EQUAL  &kp AMPERSAND  &kp BSPC
 &kp LCTRL  &kp BACKSLASH  &kp SLASH       &kp LEFT_BRACE  &kp RIGHT_BRACE    &kp ASTERISK  &trans  &trans  &kp QUESTION     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp RBKT   &kp BSLH       &kp GRAVE
 &kp LSHFT  &trans         &trans          &trans          &trans             &trans                        &kp UNDER        &kp PLUS              &kp LBRC               &kp RBRC   &kp PIPE       &kp TILDE
                                           &kp LGUI        &trans             &kp SPACE                     &kp RET          &trans                &kp RALT
+            >;
+        };
+
+        movement {
+            bindings = <
+&trans  &trans  &kp BACKSPACE  &kp UP    &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &kp LEFT       &kp DOWN  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans         &trans    &trans     &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+                               &trans    &trans     &trans                  &trans  &trans  &trans
             >;
         };
 
