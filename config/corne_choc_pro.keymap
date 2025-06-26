@@ -40,10 +40,10 @@
         symbols {
             display-name = "SYMBOL";
             bindings = <
-&kp AT     &none             &kp UNDERSCORE  &kp LBKT        &kp RIGHT_BRACKET  &kp CARET     &trans  &trans  &kp EXCLAMATION  &kp LESS_THAN         &kp GREATER_THAN       &kp EQUAL  &kp AMPERSAND  &kp BSPC
-&kp LCTRL  &kp DE_BACKSLASH  &kp SLASH       &kp LEFT_BRACE  &kp RIGHT_BRACE    &kp ASTERISK  &trans  &trans  &kp QUESTION     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp RBKT   &kp BSLH       &kp GRAVE
-&kp LSHFT  &trans            &trans          &trans          &trans             &trans                        &kp UNDER        &kp PLUS              &kp LBRC               &kp RBRC   &kp PIPE       &kp TILDE
-                                             &kp LGUI        &trans             &kp SPACE                     &kp RET          &trans                &kp RALT
+&kp DE_AT  &none             &kp DE_UNDERSCORE  &kp DE_LEFT_BRACKET  &kp DE_RIGHT_BRACKET  &kp DE_CARET  &trans  &kp BACKSPACE  &kp EXCLAMATION  &kp DE_LESS_THAN         &kp DE_GREATER_THAN       &kp DE_EQUAL         &kp DE_AMPERSAND  &kp BSPC
+&trans     &kp DE_BACKSLASH  &kp DE_SLASH       &kp DE_LEFT_BRACE    &kp DE_RIGHT_BRACE    &kp DE_STAR   &trans  &trans         &kp DE_QUESTION  &kp DE_LEFT_PARENTHESIS  &kp DE_RIGHT_PARENTHESIS  &kp DE_MINUS         &kp DE_COLON      &trans
+&trans     &kp DE_HASH       &kp DE_DOLLAR      &kp DE_PIPE          &kp DE_TILDE          &kp DE_GRAVE                         &kp DE_PLUS      &kp DE_PERCENT           &kp DE_DOUBLE_QUOTES      &kp DE_SINGLE_QUOTE  &kp DE_SEMICOLON  &trans
+                                                &kp LGUI             &trans                &kp SPACE                            &kp RET          &trans                   &kp RALT
             >;
         };
 
