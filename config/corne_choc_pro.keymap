@@ -49,10 +49,10 @@
 
         movement {
             bindings = <
-&trans  &trans  &kp BACKSPACE  &kp UP    &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &kp LEFT       &kp DOWN  &kp RIGHT  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans         &trans    &trans     &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-                               &trans    &trans     &trans                  &trans  &trans  &trans
+&trans  &trans  &kp BACKSPACE  &kp UP    &trans     &trans  &trans  &trans  &trans  &kp DE_N7  &kp DE_N8  &kp DE_N9  &trans  &trans
+&trans  &trans  &kp LEFT       &kp DOWN  &kp RIGHT  &trans  &trans  &trans  &trans  &kp DE_N4  &kp DE_N5  &kp DE_N6  &trans  &trans
+&trans  &trans  &trans         &trans    &trans     &trans                  &trans  &kp DE_N1  &kp DE_N2  &kp DE_N3  &trans  &trans
+                               &trans    &trans     &trans                  &trans  &trans     &trans
             >;
         };
 
