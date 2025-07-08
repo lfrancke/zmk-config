@@ -15,6 +15,75 @@
 };
 
 / {
+    combos {
+        compatible = "zmk,combos";
+        
+        combo_copy {
+            timeout-ms = <50>;
+            key-positions = <2 3>;
+            bindings = <&kp LC(C)>;
+        };
+        
+        combo_paste {
+            timeout-ms = <50>;
+            key-positions = <25 26>;
+            bindings = <&kp LC(V)>;
+        };
+        
+        combo_cut {
+            timeout-ms = <50>;
+            key-positions = <14 15>;
+            bindings = <&kp LC(X)>;
+        };
+        
+        combo_backspace {
+            timeout-ms = <50>;
+            key-positions = <8 9>;
+            bindings = <&kp BACKSPACE>;
+        };
+        
+        combo_delete {
+            timeout-ms = <50>;
+            key-positions = <19 20>;
+            bindings = <&kp DELETE>;
+        };
+        
+        combo_undo {
+            timeout-ms = <50>;
+            key-positions = <26 27>;
+            bindings = <&kp LC(Z)>;
+        };
+        
+        combo_redo {
+            timeout-ms = <50>;
+            key-positions = <27 28>;
+            bindings = <&kp LC(LS(Z))>;
+        };
+    };
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        lt_bs: layer_tap_backspace {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_BACKSPACE";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -24,7 +93,7 @@
 &kp J     &kp Z  &kp Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 4 DE_ESZETT
 &mo 2     &kp C  &kp S  &kp I            &kp E            &kp O            &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 2
 &kp LCMD  &kp V  &kp X  &kp DE_U_UMLAUT  &kp DE_A_UMLAUT  &kp DE_O_UMLAUT                        &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
-                        &mo 3            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 3
+                        &lt_bs 3 BSPC    &hm LSHIFT ESC   &hm LCTRL TAB                          &hm LALT RET      &hm RSHIFT SPACE       &lt 3 DEL
             >;
         };
 
