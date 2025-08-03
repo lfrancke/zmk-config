@@ -21,10 +21,10 @@
         default {
             display-name = "noted";
             bindings = <
-&kp J     &kp Z  &kp Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 4 DE_ESZETT
-&mo 2     &kp C  &kp S  &kp I            &kp E            &kp O            &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 2
-&kp LCMD  &kp V  &kp X  &kp DE_U_UMLAUT  &kp DE_A_UMLAUT  &kp DE_O_UMLAUT                        &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
-                        &mo 3            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 3
+&kp J     &kp Z  &kp DE_Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 4 DE_ESZETT
+&mo 2     &kp C  &kp S     &kp I            &kp E            &kp O            &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 2
+&kp LCMD  &kp V  &kp X     &kp DE_U_UMLAUT  &kp DE_A_UMLAUT  &kp DE_O_UMLAUT                        &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
+                           &mo 3            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 3
             >;
         };
 
