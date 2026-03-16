@@ -7,7 +7,7 @@ features:
   - keys
   - underglow
   - studio
-  - encoder
+
 outputs:
   - usb
   - ble

@@ -18,9 +18,25 @@ This was forked from https://github.com/Keebart/zmk-config
 1. Edit `config/corne_choc_pro.keymap`
 2. Push to GitHub - firmware builds automatically via GitHub Actions
 3. Download `.uf2` files from Actions artifacts
-4. Flash `corne_choc_pro_left-zmk.uf2` and `corne_choc_pro_right-zmk.uf2` (**both sides required!**)
+4. Flash both sides (see below)
 
 Alternatively, use https://nickcoutsos.github.io/keymap-editor/
+
+### Flashing Firmware
+
+The Corne Choc Pro uses an nRF52840 with the Adafruit bootloader, so it appears as a USB drive when in bootloader mode. You need to flash **both halves separately**.
+
+For each half (left and right):
+
+1. Connect the half to your computer via USB-C
+2. **Double-tap the reset button** quickly (the small button on the PCB) to enter bootloader mode -- use the SIM ejector tool included in the case to reach it
+3. A USB drive named **NICENANO** (or similar) will appear on your computer
+4. Copy the `.uf2` file to that drive:
+   - Left half: `corne_choc_pro_left-zmk.uf2`
+   - Right half: `corne_choc_pro_right-zmk.uf2`
+   - e.g. `cp firmware.uf2 /run/media/$USER/NICENANO/`
+5. The keyboard half reboots automatically once the file is copied
+6. Repeat for the other half
 
 ### Host System Setup
 **Important**: This keymap uses German layout (`keys_de.h`), so your host system needs to be set to German keyboard layout.
