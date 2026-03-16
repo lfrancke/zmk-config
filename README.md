@@ -39,20 +39,37 @@ For each half (left and right):
 6. Repeat for the other half
 
 ### Host System Setup
-**Important**: This keymap uses German layout (`keys_de.h`), so your host system needs to be set to German keyboard layout.
+**Important**: The Noted layout is implemented in the ZMK firmware keymap itself. The firmware outputs plain German (`de`) keycodes, so the host must be set to `de` layout (no variant). If your daily driver keyboard uses a different layout (e.g. Neo), you need to switch when using the Corne.
 
-#### Set German layout system-wide:
-```bash
-setxkbmap de
-```
-
-#### Set German layout for specific device only:
+#### X11
+On X11 you can set the layout per device, so the Corne can use `de` while other keyboards stay on Neo:
 ```bash
 # Find your keyboard device ID
 xinput list
 
-# Set layout for specific device (replace <device-id> with actual ID)
+# Set only the Corne to plain de (replace <device-id> with actual ID)
 setxkbmap -device <device-id> de
+```
+
+#### Wayland (Niri)
+Niri does not support per-device keyboard layouts yet ([niri#371](https://github.com/niri-wm/niri/issues/371)). As a workaround, configure both layouts and switch globally when using the Corne.
+
+In `~/.config/niri/config.kdl`:
+```kdl
+input {
+    keyboard {
+        xkb {
+            layout "de,de"
+            variant "neo,"
+        }
+    }
+}
+```
+
+This gives you two layouts: `de(neo)` (index 0) and plain `de` (index 1). Switch between them with:
+```bash
+niri msg action switch-layout 1   # plain de for Corne
+niri msg action switch-layout 0   # back to Neo
 ```
 
 ### Troubleshooting Bluetooth
