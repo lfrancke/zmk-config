@@ -2,9 +2,30 @@
  * Copyright (c) 2020 The ZMK Contributors
  *
  * SPDX-License-Identifier: MIT
+ *
+ * ============================================================================
+ * NEO2 — host-driven layout
+ * ============================================================================
+ * This keymap sends STANDARD POSITIONAL keycodes (&kp Q, &kp W, ...). It does
+ * NOT bake Neo2 into the firmware. Neo2 is produced by the HOST keyboard layout.
+ *
+ *   REQUIRED HOST LAYOUT:  de(neo)   (i.e. layout "de", variant "neo")
+ *
+ * This is intentional: your laptop and the MS Natural already run de(neo), so
+ * all three keyboards behave identically and you never toggle host layouts.
+ *
+ * Neo's higher layers come from the host, reached by HOLDING a modifier:
+ *   - Hold CAPS  -> Neo Mod3  (symbols / programming chars)
+ *   - Hold RALT  -> Neo Mod4  (navigation / numpad)
+ *   - add Shift  -> Greek / math levels
+ * You do not need to design these layers — de(neo) already defines them.
+ *
+ * The only ZMK layer below is a SETTINGS layer for things the host cannot do
+ * (Bluetooth, bootloader, reset, RGB). To build the Neo2 firmware, this file
+ * must be named config/corne_choc_pro.keymap (see README).
+ * ============================================================================
  */
 
-#include "keys_de.h"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
@@ -18,51 +39,29 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default {
-            display-name = "noted";
+        // Base alpha block is plain US-positional; the host (de(neo)) maps each
+        // physical position to its Neo2 character. Hold CAPS / RALT for Neo's
+        // Mod3 / Mod4 layers.
+        base {
+            display-name = "NEO2";
             bindings = <
-&kp J     &kp Z  &kp DE_Y  &kp U            &kp A            &kp Q            &kp C_MUTE  &kp C_PP  &kp P             &kp B                  &kp M      &kp L    &kp F  &lt 4 DE_ESZETT
-&mo 2     &kp C  &kp S     &kp I            &kp E            &kp O            &kp LALT    &kp RALT  &kp D             &kp T                  &kp N      &kp R    &kp H  &mo 2
-&kp LCMD  &kp V  &kp X     &kp DE_U_UMLAUT  &kp DE_A_UMLAUT  &kp DE_O_UMLAUT                        &kp W             &kp G                  &kp COMMA  &kp DOT  &kp K  &kp RMETA
-                           &mo 3            &kp LEFT_SHIFT   &mt LCTRL TAB                          &mt LEFT_ALT RET  &mt RIGHT_SHIFT SPACE  &mo 3
+&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T    &kp C_MUTE  &kp C_PP   &kp Y    &kp U  &kp I      &kp O    &kp P     &kp BSPC
+&kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G    &kp LALT    &kp RALT   &kp H    &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B                           &kp N    &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
+                         &kp LGUI  &kp CAPS  &kp SPACE                 &kp RET  &kp RALT  &mo 1
             >;
         };
 
-        uppercase {
+        // Firmware-only controls (host can't provide these). Reach via the
+        // right-most thumb (&mo 1). BT0..BT4 select profiles, BTCLR clears the
+        // current one, BOOT enters the bootloader for flashing.
+        settings {
+            display-name = "SETTINGS";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans                  &trans  &trans  &trans
-            >;
-        };
-
-        symbols {
-            display-name = "SYMBOL";
-            bindings = <
-&kp DE_AT  &none             &kp DE_UNDERSCORE  &kp DE_LEFT_BRACKET  &kp DE_RIGHT_BRACKET  &kp DE_CARET  &trans  &kp BACKSPACE  &kp EXCLAMATION  &kp DE_LESS_THAN         &kp DE_GREATER_THAN       &kp DE_EQUAL         &kp DE_AMPERSAND  &kp BSPC
-&trans     &kp DE_BACKSLASH  &kp DE_SLASH       &kp DE_LEFT_BRACE    &kp DE_RIGHT_BRACE    &kp DE_STAR   &trans  &trans         &kp DE_QUESTION  &kp DE_LEFT_PARENTHESIS  &kp DE_RIGHT_PARENTHESIS  &kp DE_MINUS         &kp DE_COLON      &trans
-&trans     &kp DE_HASH       &kp DE_DOLLAR      &kp DE_PIPE          &kp DE_TILDE          &kp DE_GRAVE                         &kp DE_PLUS      &kp DE_PERCENT           &kp DE_DOUBLE_QUOTES      &kp DE_SINGLE_QUOTE  &kp DE_SEMICOLON  &trans
-                                                &kp LGUI             &trans                &kp SPACE                            &kp RET          &trans                   &kp RALT
-            >;
-        };
-
-        movement {
-            bindings = <
-&trans  &trans  &kp BACKSPACE  &kp UP    &trans     &trans  &trans  &trans  &trans  &kp DE_N7  &kp DE_N8  &kp DE_N9  &trans  &trans
-&trans  &trans  &kp LEFT       &kp DOWN  &kp RIGHT  &trans  &trans  &trans  &trans  &kp DE_N4  &kp DE_N5  &kp DE_N6  &trans  &trans
-&trans  &trans  &trans         &trans    &trans     &trans                  &trans  &kp DE_N1  &kp DE_N2  &kp DE_N3  &trans  &trans
-                               &trans    &trans     &trans                  &trans  &trans     &trans
-            >;
-        };
-
-        zmk_layer_3 {
-            display-name = "ZMK";
-            bindings = <
-&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &kp LCTRL  &kp RCTRL  &kp N6    &kp N7    &kp N8     &kp N9     &kp N0  &trans
-&kp LCTRL  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp LALT   &kp RALT   &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &trans  &trans
-&kp LSHFT  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                        &trans    &trans    &trans     &trans     &trans  &trans
-                                          &kp LGUI      &trans        &kp SPACE                             &kp LGUI  &trans    &kp SPACE
+&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &trans  &trans  &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &trans
+&kp LCTRL  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
+&kp LSHFT  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                  &trans    &trans    &trans  &trans     &trans  &trans
+                                          &kp LGUI      &trans        &kp SPACE                       &kp RET   &trans    &trans
             >;
         };
     };

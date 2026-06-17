@@ -38,39 +38,42 @@ For each half (left and right):
 5. The keyboard half reboots automatically once the file is copied
 6. Repeat for the other half
 
+### Keymap Layouts (active vs. archived)
+
+Two layouts are maintained. **CI only ever builds `config/corne_choc_pro.keymap`** (the file named after the board); the other is a dormant archive.
+
+- `config/corne_choc_pro.keymap` — the **active** layout. Currently **Neo2 (host-driven)**. Edit and tune this file directly.
+- `config/corne_choc_pro_noted.keymap` — archived **Noted (firmware-baked)** layout. Not built.
+
+To switch which layout the firmware uses, copy the desired variant over the active file, then push and flash:
+```bash
+# Build Noted instead of Neo2:
+cp config/corne_choc_pro_noted.keymap config/corne_choc_pro.keymap
+```
+Your current Neo2 work stays in git history; restore it with `git checkout <neo2-commit> -- config/corne_choc_pro.keymap`.
+
 ### Host System Setup
-**Important**: The Noted layout is implemented in the ZMK firmware keymap itself. The firmware outputs plain German (`de`) keycodes, so the host must be set to `de` layout (no variant). If your daily driver keyboard uses a different layout (e.g. Neo), you need to switch when using the Corne.
+
+The **active layout is Neo2, host-driven**: the firmware sends *standard positional* keycodes and the host keyboard layout turns them into Neo2. This is deliberate — your laptop and the MS Natural already run `de(neo)`, so all three keyboards behave identically and you never toggle host layouts.
+
+**Required host layout: `de` + variant `neo`** (your normal Neo2 setup — nothing Corne-specific).
+
+Neo's higher layers come *from the host* by holding a modifier (this is the "advanced features" payoff):
+- Hold **CapsLock** → Neo Mod3 (symbols / programming)
+- Hold **RightAlt** → Neo Mod4 (navigation / numpad)
+- add **Shift** → Greek / math levels
+
+#### Niri / Wayland
+`~/.config/niri/config.kdl` already sets layout 0 to `de(neo)` — Corne and other keyboards all use it. **No switching needed for Neo2.** (Layout 1, plain `de`, only matters if you flash the archived Noted firmware.)
 
 #### X11
-On X11 you can set the layout per device, so the Corne can use `de` while other keyboards stay on Neo:
 ```bash
-# Find your keyboard device ID
-xinput list
-
-# Set only the Corne to plain de (replace <device-id> with actual ID)
-setxkbmap -device <device-id> de
+setxkbmap de neo                              # system-wide
+setxkbmap -device <id> de neo                 # one device only (xinput list for the id)
 ```
 
-#### Wayland (Niri)
-Niri does not support per-device keyboard layouts yet ([niri#371](https://github.com/niri-wm/niri/issues/371)). As a workaround, configure both layouts and switch globally when using the Corne.
-
-In `~/.config/niri/config.kdl`:
-```kdl
-input {
-    keyboard {
-        xkb {
-            layout "de,de"
-            variant "neo,"
-        }
-    }
-}
-```
-
-This gives you two layouts: `de(neo)` (index 0) and plain `de` (index 1). Switch between them with:
-```bash
-niri msg action switch-layout 1   # plain de for Corne
-niri msg action switch-layout 0   # back to Neo
-```
+#### If you flash the archived Noted firmware instead
+Noted is firmware-baked and outputs plain `de` keycodes, so it needs the host on **plain `de`** (no variant) — the opposite of Neo2. Niri: `niri msg action switch-layout 1`. X11: `setxkbmap de`.
 
 ### Troubleshooting Bluetooth
 1. Use the settings reset firmware: `settings_reset-corne_choc_pro_left-zmk.uf2`
@@ -84,3 +87,6 @@ niri msg action switch-layout 0   # back to Neo
 ## Notes for Future Me
 - I removed encoder/SPI configs because my hardware doesn't have them
 - I removed Piantor config
+- **Layout decision**: the real goal of the Corne is the *split ergonomics + finally using layers*, not switching base layout. So the active keymap is **Neo2, host-driven** — consistent with my laptop + MS Natural (all `de(neo)`), and Neo's higher layers come from the host for free (hold CapsLock / RightAlt). The earlier **Noted** experiment is archived in `corne_choc_pro_noted.keymap` if I ever want to revisit it.
+- `config/keys_neo.h` is only used by a *firmware-baked* Neo approach (not the current host-driven one). It's currently unused — keep it only if you might bake Neo into firmware later.
+- `config/keys_de.h` is used by the archived Noted keymap.
