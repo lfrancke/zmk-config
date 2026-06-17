@@ -24,19 +24,29 @@ Alternatively, use https://nickcoutsos.github.io/keymap-editor/
 
 ### Flashing Firmware
 
-The Corne Choc Pro uses an nRF52840 with the Adafruit bootloader, so it appears as a USB drive when in bootloader mode. You need to flash **both halves separately**.
+The Corne Choc Pro uses an nRF52840 with the Adafruit UF2 bootloader, so it appears as a USB drive when in bootloader mode. You flash **both halves separately**.
 
-For each half (left and right):
+**Easiest: use the helper script.** It downloads the latest CI build and walks you through both halves:
+```bash
+./flash.sh                              # download latest build, flash both halves
+./flash.sh --dir /path/to/firmware right  # use local .uf2 files, one half only
+./flash.sh --reset                      # flash the settings_reset firmware (BT recovery)
+```
 
-1. Connect the half to your computer via USB-C
-2. **Double-tap the reset button** quickly (the small button on the PCB) to enter bootloader mode -- use the SIM ejector tool included in the case to reach it
-3. A USB drive named **NICENANO** (or similar) will appear on your computer
-4. Copy the `.uf2` file to that drive:
+**Manual steps**, for each half:
+
+1. Connect the half to your computer via USB-C.
+2. **Double-tap the reset button on the BACK of the half** to enter bootloader mode. (There's also a `&bootloader` key on the settings layer if the keyboard is running.)
+3. A USB drive labelled **`KEEBART`** appears. It usually does **not** auto-mount, so mount it:
+   ```bash
+   udisksctl mount -b /dev/sda      # adjust device if needed; lsblk shows LABEL=KEEBART
+   ```
+4. Copy the `.uf2` to it:
    - Left half: `corne_choc_pro_left-zmk.uf2`
    - Right half: `corne_choc_pro_right-zmk.uf2`
-   - e.g. `cp firmware.uf2 /run/media/$USER/NICENANO/`
-5. The keyboard half reboots automatically once the file is copied
-6. Repeat for the other half
+   - e.g. `cp corne_choc_pro_left-zmk.uf2 /run/media/$USER/KEEBART/ && sync`
+5. The half reboots automatically once the file is copied (the drive disappears).
+6. Repeat for the other half. The bootloader is identical on both halves, so do them one at a time.
 
 ### Keymap Layouts (active vs. archived)
 
