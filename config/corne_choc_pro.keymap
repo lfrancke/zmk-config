@@ -3,27 +3,16 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * ============================================================================
- * NEO2 — host-driven layout
- * ============================================================================
- * This keymap sends STANDARD POSITIONAL keycodes (&kp Q, &kp W, ...). It does
- * NOT bake Neo2 into the firmware. Neo2 is produced by the HOST keyboard layout.
+ * Neo2, host-driven. The firmware sends US-positional keycodes and the host
+ * layout de(neo) turns them into Neo2. Requires the host on layout "de",
+ * variant "neo".
  *
- *   REQUIRED HOST LAYOUT:  de(neo)   (i.e. layout "de", variant "neo")
- *
- * This is intentional: your laptop and the MS Natural already run de(neo), so
- * all three keyboards behave identically and you never toggle host layouts.
- *
- * Neo's higher layers come from the host, reached by HOLDING a modifier:
- *   - Hold CAPS  -> Neo Mod3  (symbols / programming chars)
- *   - Hold RALT  -> Neo Mod4  (navigation / numpad)
- *   - add Shift  -> Greek / math levels
- * You do not need to design these layers — de(neo) already defines them.
- *
- * The only ZMK layer below is a SETTINGS layer for things the host cannot do
- * (Bluetooth, bootloader, reset, RGB). To build the Neo2 firmware, this file
- * must be named config/corne_choc_pro.keymap (see README).
- * ============================================================================
+ * Neo's modifiers are sent as the keys de(neo) expects them on:
+ *   CAPS        Mod3 left  (symbols)
+ *   BSLH        Mod3 right (<BKSL>)
+ *   NON_US_BSLH Mod4 left  (<LSGT>, navigation/numpad)
+ *   RALT        Mod4 right
+ * Mod3 + Mod4 together, or with Shift, reach the Greek and math levels.
  */
 
 #include <behaviors.dtsi>
@@ -39,29 +28,29 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Base alpha block is plain US-positional; the host (de(neo)) maps each
-        // physical position to its Neo2 character. Hold CAPS / RALT for Neo's
-        // Mod3 / Mod4 layers.
+        // Rendered by de(neo):
+        //   Tab   x v l c w   Esc  Bspc   k h g f q  ß
+        //   M3    u i a e o   Super Alt   s n r t d  y
+        //   Shift ü ö ä p z               b m , . j  Shift
+        //              Ctrl M4 Space    Enter M3 M4
+        // Hold Esc for the settings layer.
         base {
             display-name = "NEO2";
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T    &kp C_MUTE  &kp C_PP   &kp Y    &kp U  &kp I      &kp O    &kp P     &kp BSPC
-&kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G    &kp LALT    &kp RALT   &kp H    &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B                           &kp N    &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp ESC
-                         &kp LGUI  &kp CAPS  &kp SPACE                 &kp RET  &kp RALT  &mo 1
+&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T    &lt 1 ESC  &kp BSPC   &kp Y  &kp U  &kp I      &kp O    &kp P     &kp LBKT
+&kp CAPS   &kp A  &kp S  &kp D  &kp F  &kp G    &kp LGUI   &kp LALT   &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B                          &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                  &kp LCTRL  &kp NON_US_BSLH  &kp SPACE               &kp RET  &kp BSLH  &kp RALT
             >;
         };
 
-        // Firmware-only controls (host can't provide these). Reach via the
-        // right-most thumb (&mo 1). BT0..BT4 select profiles, BTCLR clears the
-        // current one, BOOT enters the bootloader for flashing.
         settings {
             display-name = "SETTINGS";
             bindings = <
-&kp TAB    &kp N1        &kp N2           &kp N3        &kp N4        &kp N5          &trans  &trans  &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &trans
-&kp LCTRL  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
-&kp LSHFT  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                  &trans    &trans    &trans  &trans     &trans  &trans
-                                          &kp LGUI      &trans        &kp SPACE                       &kp RET   &trans    &trans
+&trans  &kp C_MUTE    &kp C_VOL_DN     &kp C_VOL_UP  &kp C_PP      &trans          &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &bt BT_CLR    &rgb_ug RGB_TOG  &sys_reset    &bootloader   &studio_unlock                  &trans  &trans  &trans  &trans  &trans  &trans
+                                       &trans        &trans        &trans                          &trans  &trans  &trans
             >;
         };
     };

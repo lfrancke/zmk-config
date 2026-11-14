@@ -20,7 +20,9 @@ This was forked from https://github.com/Keebart/zmk-config
 3. Download `.uf2` files from Actions artifacts
 4. Flash both sides (see below)
 
-Alternatively, use https://nickcoutsos.github.io/keymap-editor/
+Alternatively, use https://nickcoutsos.github.io/keymap-editor/ (edits the `.keymap` in this repo, CI builds as usual).
+
+**ZMK Studio** (https://zmk.studio, Chromium, left half over USB, unlock via the settings layer) edits the keymap live on the keyboard without building. Those edits never reach the repo, and a keymap saved in Studio overrides newly flashed firmware until you use "Restore Stock Settings" in Studio.
 
 ### Flashing Firmware
 
@@ -68,10 +70,13 @@ The **active layout is Neo2, host-driven**: the firmware sends *standard positio
 
 **Required host layout: `de` + variant `neo`** (your normal Neo2 setup — nothing Corne-specific).
 
-Neo's higher layers come *from the host* by holding a modifier (this is the "advanced features" payoff):
-- Hold **CapsLock** → Neo Mod3 (symbols / programming)
-- Hold **RightAlt** → Neo Mod4 (navigation / numpad)
-- add **Shift** → Greek / math levels
+Neo's higher layers come *from the host*. The keymap sends Neo's modifier keys where a normal Neo board has them, as far as 46 keys allow:
+- **Mod3** (symbols): left pinky, left of `u` (CapsLock), and right thumb middle (`<BKSL>`)
+- **Mod4** (navigation, numpad): left thumb middle (`<LSGT>`) and right thumb outer (RightAlt)
+- Mod3 + Mod4 or Shift reach the Greek / math levels
+- Hold **Esc** (inner top key, left half) for the settings layer: BT profiles, bootloader, Studio unlock, media
+
+Not reachable on 46 keys: the dead keys (`^`, `` ` ``, `´` as accent keys) and the number row (numbers are on Mod4).
 
 #### Niri / Wayland
 `~/.config/niri/config.kdl` already sets layout 0 to `de(neo)` — Corne and other keyboards all use it. **No switching needed for Neo2.** (Layout 1, plain `de`, only matters if you flash the archived Noted firmware.)
@@ -97,6 +102,6 @@ Noted is firmware-baked and outputs plain `de` keycodes, so it needs the host on
 ## Notes for Future Me
 - I removed encoder/SPI configs because my hardware doesn't have them
 - I removed Piantor config
-- **Layout decision**: the real goal of the Corne is the *split ergonomics + finally using layers*, not switching base layout. So the active keymap is **Neo2, host-driven** — consistent with my laptop + MS Natural (all `de(neo)`), and Neo's higher layers come from the host for free (hold CapsLock / RightAlt). The earlier **Noted** experiment is archived in `corne_choc_pro_noted.keymap` if I ever want to revisit it.
+- **Layout decision**: the real goal of the Corne is the *split ergonomics + finally using layers*, not switching base layout. So the active keymap is **Neo2, host-driven** — consistent with my laptop + MS Natural (all `de(neo)`), and Neo's higher layers come from the host. The v1 keymap put Mod3/Mod4 on one thumb each and lost `ß`; v2 mirrors a normal Neo board's modifier positions instead, so only the physical shape is new. The earlier **Noted** experiment is archived in `corne_choc_pro_noted.keymap` if I ever want to revisit it.
 - `config/keys_neo.h` is only used by a *firmware-baked* Neo approach (not the current host-driven one). It's currently unused — keep it only if you might bake Neo into firmware later.
 - `config/keys_de.h` is used by the archived Noted keymap.
