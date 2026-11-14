@@ -71,12 +71,15 @@ The **active layout is Neo2, host-driven**: the firmware sends *standard positio
 **Required host layout: `de` + variant `neo`** (your normal Neo2 setup — nothing Corne-specific).
 
 Neo's higher layers come *from the host*. The keymap sends Neo's modifier keys where a normal Neo board has them, as far as 46 keys allow:
-- **Mod3** (symbols): left pinky, left of `u` (CapsLock), and right thumb middle (`<BKSL>`)
-- **Mod4** (navigation, numpad): left thumb middle (`<LSGT>`) and right thumb outer (RightAlt)
+- **Mod3** (symbols): left pinky, left of `u` (CapsLock, L2.1), and right thumb middle (`<BKSL>`, RT2)
+- **Mod4** (navigation, numpad): left thumb middle (`<LSGT>`, LT2)
+- Thumbs: Ctrl, Mod4, Space on the left; Bksp, Mod3, Enter on the right. Inner column (hard to reach): Esc, Del, Super, Alt
 - Mod3 + Mod4 or Shift reach the Greek / math levels
-- Hold **Esc** (inner top key, left half) for the settings layer: BT profiles, bootloader, Studio unlock, media
+- Hold **Esc** (L1.7) for the settings layer. Left half: BT profiles, bootloader, Studio unlock, media. Right half: what Neo keeps on the number row, `° § ℓ » « —`, `€ „ “ ”`, and the accent dead keys `^ ` ´`
 
-Not reachable on 46 keys: the dead keys (`^`, `` ` ``, `´` as accent keys) and the number row (numbers are on Mod4).
+Numbers are on Mod4. Not reachable: the Mod3 level of Neo's number row (`¹ ² ³ › ‹ ¢ ¥ ‚ ‘ ’`).
+
+Key IDs (L/R, row, column from the outside; thumbs T1 outer to T3 big key) match the interactive map: https://claude.ai/artifact/7XZupRLkaHuHTtH5ygteM1
 
 #### Niri / Wayland
 `~/.config/niri/config.kdl` already sets layout 0 to `de(neo)` — Corne and other keyboards all use it. **No switching needed for Neo2.** (Layout 1, plain `de`, only matters if you flash the archived Noted firmware.)
