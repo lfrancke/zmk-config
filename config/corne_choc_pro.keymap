@@ -31,16 +31,17 @@
         compatible = "zmk,keymap";
 
         // Rendered by de(neo):
-        //   Tab   x v l c w   Esc   Del   k h g f q  ß
-        //   M3    u i a e o   Super Alt   s n r t d  y
+        //   Tab   x v l c w   Esc  Super  k h g f q  ß
+        //   M3    u i a e o   Alt   Alt   s n r t d  y
         //   Shift ü ö ä p z               b m , . j  Shift
         //              Ctrl M4 Space    Bksp M3 Enter
-        // Hold Esc for the settings layer.
+        // Hold Esc for the settings layer. Alt is on both halves so Alt + letter
+        // can use the other hand; both send left Alt because right Alt is Mod4.
         base {
             display-name = "NEO2";
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T    &lt 1 ESC  &kp DEL    &kp Y  &kp U  &kp I      &kp O    &kp P     &kp LBKT
-&kp CAPS   &kp A  &kp S  &kp D  &kp F  &kp G    &kp LGUI   &kp LALT   &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T    &lt 1 ESC  &kp LGUI   &kp Y  &kp U  &kp I      &kp O    &kp P     &kp LBKT
+&kp CAPS   &kp A  &kp S  &kp D  &kp F  &kp G    &kp LALT   &kp LALT   &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B                          &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
                   &kp LCTRL  &kp NON_US_BSLH  &kp SPACE               &kp BSPC  &kp BSLH  &kp RET
             >;
